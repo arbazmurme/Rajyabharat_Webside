@@ -78,7 +78,7 @@ const Header = () => {
       let extra = [];
 
       for (let item of navItems) {
-        totalWidth += 120; // Approximate width per item
+        totalWidth += 120;
         if (totalWidth < containerWidth - 150) {
           visible.push(item);
         } else {
@@ -149,14 +149,14 @@ const Header = () => {
 
           {/* Buttons */}
           <div className="flex flex-row md:flex-col space-x-1 md:space-y-2">
-            <button className="bg-blue-600 text-white px-4 md:py-2 rounded-lg flex items-center justify-center space-x-2">
-              <span className=" text-[12px] md:text-[14px]"> 📄 E Paper</span>
+            <button className="bg-blue-600 text-white px-4 rounded-lg flex items-center justify-center space-x-2">
+              <span className=" text-[12px] md:text-[14px] py-2 md:my-0">📄 E Paper</span>
             </button>
-            <button className="bg-blue-600 text-white px-4 md:py-2 rounded-lg flex items-center justify-center space-x-2">
-              📄 <span className=" text-[12px]">TS Dynamic</span>
+            <button className="bg-blue-600 text-white py-2 px-4 md:py-2 rounded-lg flex items-center justify-center space-x-2">
+              <span className=" text-[12px] md:text-[14px] md:my-0">📄 TS Dynamic</span>
             </button>
-            <button className="bg-blue-600 text-white px-4 md:py-2 rounded-lg flex items-center justify-center space-x-2">
-              📄 <span className=" text-[12px]">AP Dynamic</span>
+            <button className="bg-blue-600 text-white py-2  px-4 md:py-2 rounded-lg flex items-center justify-center space-x-2">
+              <span className=" text-[12px] md:text-[14px] md:my-0">📄 AP Dynamic</span>
             </button>
           </div>
         </div>

@@ -90,7 +90,7 @@ export default function NewsLayout() {
           <h2 className="bg-blue-600 text-white px-4 py-2 inline-block">
             Top stories
           </h2>
-          <div className="relative w-full max-w-[22rem] md:max-w-full  mx-auto">
+          <div className="relative w-full max-w-[21rem] md:max-w-full  mx-auto">
             {" "}
             {/* Ensuring responsiveness */}
             <Swiper
