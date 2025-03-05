@@ -14,7 +14,7 @@ import {
 const Footer = () => {
   return (
     <footer className="mt-8 bg-violet-900 pt-9 text-white">
-      <div className="mx-auto w-full max-w-[1166px] px-4 xl:px-0">
+      <div className="mx-auto w-full px-4 xl:px-0">
         <div className="flex flex-col justify-between sm:px-6 md:flex-row md:px-10">
           {/* Left Section - Logo & Description */}
           <div className="md:w-[316px]">
@@ -87,8 +87,21 @@ const Footer = () => {
           </div>
 
           {/* Right Section - Links */}
-          <div className="mt-6 md:mt-0 md:max-w-[341px]">
+          <div className="mt-6 mb-2 md:mb-0 md:mt-0 md:max-w-[341px] ">
             <div>
+                 {/* App Download Section */}
+              <div className="mt-6">
+                <p className="text-[18px] font-medium">Download the App</p>
+                <div className="mt-3 flex gap-4">
+                  <a href="#">
+                    <img
+                      src="./gat-app-now.png"
+                      alt="Google Play"
+                      className="h-12"
+                    />
+                  </a>
+                </div>
+              </div>
               <p className="text-[18px] font-medium">Pages</p>
               <ul className="mt-4 space-y-3">
                 <li>
@@ -102,25 +115,11 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link className="hover:text-gray-300" href="/contact">
+                  <Link className="hover:text-gray-300 mb" href="/contact">
                     📄 AP Dynamic
                   </Link>
                 </li>
               </ul>
-            </div>
-
-            {/* App Download Section */}
-            <div className="mt-6">
-              <p className="text-[18px] font-medium">Download the App</p>
-              <div className="mt-3 flex gap-4">
-                <a href="#">
-                  <img
-                    src="./gat-app-now.png"
-                    alt="Google Play"
-                    className="h-12"
-                  />
-                </a>
-              </div>
             </div>
           </div>
         </div>

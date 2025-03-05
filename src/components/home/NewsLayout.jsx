@@ -84,13 +84,15 @@ export default function NewsLayout() {
       </div>
 
       {/* News Grid */}
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-8">
         {/* Left Column: Top Stories */}
-        <div>
+        <div className="  rounded-sm p-1">
           <h2 className="bg-blue-600 text-white px-4 py-2 inline-block">
             Top stories
           </h2>
-          <div className="relative w-full">
+          <div className="relative w-full max-w-[22rem] md:max-w-full  mx-auto">
+            {" "}
+            {/* Ensuring responsiveness */}
             <Swiper
               modules={[Navigation, Pagination, Autoplay]}
               slidesPerView={1}
@@ -98,6 +100,11 @@ export default function NewsLayout() {
               autoplay={{ delay: 4000 }}
               loop={true}
               navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
+              breakpoints={{
+                640: { slidesPerView: 1 }, // Mobile
+                768: { slidesPerView: 1 }, // Tablet
+                1024: { slidesPerView: 1 }, // Desktop
+              }}
               onInit={(swiper) => {
                 if (swiper.params.navigation) {
                   swiper.params.navigation.prevEl = prevRef.current;
@@ -114,7 +121,7 @@ export default function NewsLayout() {
                     <img
                       src={slide.img}
                       alt="Top story"
-                      className="w-full h-52 object-cover rounded"
+                      className="w-full max-w-[600px] mx-auto h-52 object-cover rounded" // Limited width
                     />
                     <div className="absolute inset-0 flex items-end">
                       <p className="bg-gradient-to-t from-black/80 to-transparent text-white px-4 pb-4 pt-12 rounded">
@@ -125,7 +132,6 @@ export default function NewsLayout() {
                 </SwiperSlide>
               ))}
             </Swiper>
-
             {/* Left Navigation Button */}
             <button
               ref={prevRef}
@@ -133,7 +139,6 @@ export default function NewsLayout() {
             >
               <FaChevronLeft size={24} />
             </button>
-
             {/* Right Navigation Button */}
             <button
               ref={nextRef}
@@ -147,7 +152,7 @@ export default function NewsLayout() {
           <h2 className="bg-blue-600 text-white px-4 py-2 inline-block mt-6">
             Movie
           </h2>
-          <ul className="list-disc list-inside mt-2 space-y-2">
+          <ul className="list-disc align-middle mt-2 space-y-2 pl-4">
             <li>
               Aishwarya Rai-Abhishek: Aishwarya Rai-Abhishek are trending once
               again.. Netizens react to their divorce rumors!
@@ -161,12 +166,13 @@ export default function NewsLayout() {
             More »
           </button>
         </div>
+
         {/* Center Column: Latest News */}
-        <div>
+        <div className="  rounded-sm p-1">
           <h2 className="bg-blue-600 text-white px-4 py-2 inline-block">
             Latest News
           </h2>
-          <ul className="list-disc list-inside mt-4 space-y-3">
+          <ul className="list-disc align-middle mt-4 space-y-3 pl-4">
             {latestNews.map((news, index) => (
               <li key={index} className="border-b pb-2">
                 {news}
@@ -179,7 +185,7 @@ export default function NewsLayout() {
           </button>
         </div>
         {/* Right Column: District News */}
-        <div>
+        <div className="  rounded-sm p-1">
           <div className="flex justify-between items-center">
             <h2 className="bg-blue-600 text-white px-4 py-2 inline-block">
               District News
@@ -217,24 +223,24 @@ export default function NewsLayout() {
           </button>
         </div>
 
-        <div>
+        <div className="rounded-sm">
           <h2 className="bg-blue-600 text-white px-4 py-2 inline-block">
             Crime
           </h2>
-          <ul className="list-disc list-inside mt-4 space-y-3">
-            <div className="relative mt-4">
-              <img
-                src="/test1.jpg"
-                alt="Top story"
-                className="w-full h-52 object-cover rounded"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-10 flex items-end p-4 text-white">
-                <p>
-                  Phone Tapping Case: Key turning point in phone tapping case..
-                  Red Corner Notices reach Interpol
-                </p>
-              </div>
+          <div className="relative mt-4">
+            <img
+              src="/test1.jpg"
+              alt="Top story"
+              className="w-full h-52 object-cover rounded"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-10 flex items-end p-4 text-white">
+              <p>
+                Phone Tapping Case: Key turning point in phone tapping case..
+                Red Corner Notices reach Interpol
+              </p>
             </div>
+          </div>
+          <ul className="list-disc align-middle mt-4 space-y-3 pl-4">
             {latestNews.map((news, index) => (
               <li key={index} className="border-b pb-2">
                 {news}
@@ -246,24 +252,24 @@ export default function NewsLayout() {
             More »
           </button>
         </div>
-        <div>
+        <div className="rounded-sm">
           <h2 className="bg-blue-600 text-white px-4 py-2 inline-block">
             Politice
           </h2>
-          <ul className="list-disc list-inside mt-4 space-y-3">
-            <div className="relative mt-4">
-              <img
-                src="/test2.jpg"
-                alt="Top story"
-                className="w-full h-52 object-cover rounded"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-10 flex items-end p-4 text-white">
-                <p>
-                  Phone Tapping Case: Key turning point in phone tapping case..
-                  Red Corner Notices reach Interpol
-                </p>
-              </div>
+          <div className="relative mt-4">
+            <img
+              src="/test2.jpg"
+              alt="Top story"
+              className="w-full h-52 object-cover rounded"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-10 flex items-end p-4 text-white">
+              <p>
+                Phone Tapping Case: Key turning point in phone tapping case..
+                Red Corner Notices reach Interpol
+              </p>
             </div>
+          </div>
+          <ul className="list-disc align-middle mt-4 space-y-3 pl-4">
             {latestNews.map((news, index) => (
               <li key={index} className="border-b pb-2">
                 {news}
@@ -275,24 +281,24 @@ export default function NewsLayout() {
             More »
           </button>
         </div>
-        <div>
+        <div className="rounded-sm">
           <h2 className="bg-blue-600 text-white px-4 py-2 inline-block">
             Career
           </h2>
-          <ul className="list-disc list-inside mt-4 space-y-3">
-            <div className="relative mt-4">
-              <img
-                src="/test3.jpg"
-                alt="Top story"
-                className="w-full h-52 object-cover rounded"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-10 flex items-end p-4 text-white">
-                <p>
-                  Phone Tapping Case: Key turning point in phone tapping case..
-                  Red Corner Notices reach Interpol
-                </p>
-              </div>
+          <div className="relative mt-4">
+            <img
+              src="/test3.jpg"
+              alt="Top story"
+              className="w-full h-52 object-cover rounded"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-10 flex items-end p-4 text-white">
+              <p>
+                Phone Tapping Case: Key turning point in phone tapping case..
+                Red Corner Notices reach Interpol
+              </p>
             </div>
+          </div>
+          <ul className="list-disc align-middle mt-4 space-y-3 pl-4">
             {latestNews.map((news, index) => (
               <li key={index} className="border-b pb-2">
                 {news}
