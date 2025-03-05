@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Menu, MenuItem } from "@mui/material";
 import { MenuIcon } from "lucide-react";
+import { Button, Drawer } from "antd";
 
 const navItems = [
   "Telangana",
@@ -24,6 +25,7 @@ const Header = () => {
   const [visibleItems, setVisibleItems] = useState(navItems);
   const [moreItems, setMoreItems] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -109,7 +111,10 @@ const Header = () => {
     <>
       {/* Topbar Start */}
       <div id="top-bar" className="animate-fade-in">
-        <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-2 text-sm bg-gray-100 w-full">
+        <div className="absolute top-0 left-0 flex flex-col md:flex-row  px-4 md:px-8 py-4 w-full md:hidden">
+          <MenuIcon  onClick={() => setOpen(true)} />
+        </div>
+        <div className="hidden md:flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-2 text-sm bg-gray-100 w-full">
           <span className="text-gray-700 text-center md:text-left">
             {new Date().toLocaleString("en-GB", {
               weekday: "short",
@@ -132,26 +137,26 @@ const Header = () => {
           </div>
         </div>
         <hr className="border-gray-300" />
-        <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-4 w-full">
+        <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-4 w-full  bg-gray-200">
           {/* Logo */}
           <div className="mb-4 md:mb-0">
             <img
               src="./logo.jpeg"
               alt="Rajyabharat Logo"
-              className="h-40 mx-auto md:mx-0"
+              className="h-16 md:h-40 mx-auto md:mx-0"
             />
           </div>
 
           {/* Buttons */}
-          <div className="flex flex-col space-y-2">
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center justify-center space-x-2">
-              📄 <span>E Paper</span>
+          <div className="flex flex-row md:flex-col space-x-1 md:space-y-2">
+            <button className="bg-blue-600 text-white px-4 md:py-2 rounded-lg flex items-center justify-center space-x-2">
+              <span className=" text-[12px] md:text-[14px]"> 📄 E Paper</span>
             </button>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center justify-center space-x-2">
-              📄 <span>TS Dynamic</span>
+            <button className="bg-blue-600 text-white px-4 md:py-2 rounded-lg flex items-center justify-center space-x-2">
+              📄 <span className=" text-[12px]">TS Dynamic</span>
             </button>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center justify-center space-x-2">
-              📄 <span>AP Dynamic</span>
+            <button className="bg-blue-600 text-white px-4 md:py-2 rounded-lg flex items-center justify-center space-x-2">
+              📄 <span className=" text-[12px]">AP Dynamic</span>
             </button>
           </div>
         </div>
@@ -213,6 +218,17 @@ const Header = () => {
           ↑
         </button>
       )}
+      <div>
+        <Drawer
+          title="Navigation Drawer"
+          placement="left"
+          width="60vw"
+          onClose={() => setOpen(false)}
+          open={open}
+        >
+          <p>Content goes here...</p>
+        </Drawer>
+      </div>
     </>
   );
 };
