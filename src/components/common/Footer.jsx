@@ -89,19 +89,6 @@ const Footer = () => {
           {/* Right Section - Links */}
           <div className="mt-6 mb-2 md:mb-0 md:mt-0 md:max-w-[341px] ">
             <div>
-                 {/* App Download Section */}
-              <div className="mt-6">
-                <p className="text-[18px] font-medium">Download the App</p>
-                <div className="mt-3 flex gap-4">
-                  <a href="#">
-                    <img
-                      src="./gat-app-now.png"
-                      alt="Google Play"
-                      className="h-12"
-                    />
-                  </a>
-                </div>
-              </div>
               <p className="text-[18px] font-medium">Pages</p>
               <ul className="mt-4 space-y-3">
                 <li>
@@ -121,6 +108,19 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
+              {/* App Download Section */}
+              <div className="mt-6 mb-4">
+                <p className="text-[18px] font-medium">Download the App</p>
+                <div className="mt-3 flex gap-4">
+                  <a href="#">
+                    <img
+                      src="./gat-app-now.png"
+                      alt="Google Play"
+                      className="h-12"
+                    />
+                  </a>
+                </div>
+              </div>
           </div>
         </div>
       </div>
