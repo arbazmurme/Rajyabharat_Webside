@@ -108,17 +108,13 @@ const Header = () => {
   return (
     <>
       {/* Topbar Start */}
-      <div id="top-bar">
+      <div id="top-bar" className="animate-fade-in">
         <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-2 text-sm bg-gray-100 w-full">
           <span className="text-gray-700 text-center md:text-left">
-            {new Date().toLocaleString("en-GB", {
-              weekday: "short",
-              day: "numeric",
-              month: "long",
-              year: "numeric",
+            {new Date().toLocaleTimeString("en-GB", {
               hour: "numeric",
               minute: "numeric",
-              second: "numeric",
+              second: "2-digit",
               hour12: true,
             })}
           </span>
@@ -159,7 +155,7 @@ const Header = () => {
       {/* Topbar End */}
 
       {/* Main Nav Start */}
-      <div id="myHeader">
+      <div id="myHeader" className="animate-fade-in">
         <nav
           ref={navRef}
           className="bg-yellow-400 py-3 px-5 flex items-center justify-between"
