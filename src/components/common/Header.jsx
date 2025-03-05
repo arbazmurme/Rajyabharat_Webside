@@ -111,10 +111,14 @@ const Header = () => {
       <div id="top-bar" className="animate-fade-in">
         <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-2 text-sm bg-gray-100 w-full">
           <span className="text-gray-700 text-center md:text-left">
-            {new Date().toLocaleTimeString("en-GB", {
+            {new Date().toLocaleString("en-GB", {
+              weekday: "short",
+              day: "numeric",
+              month: "long",
+              year: "numeric",
               hour: "numeric",
               minute: "numeric",
-              second: "2-digit",
+              second: "numeric",
               hour12: true,
             })}
           </span>
@@ -132,9 +136,9 @@ const Header = () => {
           {/* Logo */}
           <div className="mb-4 md:mb-0">
             <img
-              src="/your-logo.png"
+              src="./logo.jpeg"
               alt="Rajyabharat Logo"
-              className="h-14 mx-auto md:mx-0"
+              className="h-40 mx-auto md:mx-0"
             />
           </div>
 
@@ -155,7 +159,7 @@ const Header = () => {
       {/* Topbar End */}
 
       {/* Main Nav Start */}
-      <div id="myHeader" className="animate-fade-in">
+      <div id="myHeader" className="animate-fade-in z-50  ">
         <nav
           ref={navRef}
           className="bg-yellow-400 py-3 px-5 flex items-center justify-between"
