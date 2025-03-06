@@ -84,7 +84,7 @@ export default function NewsLayout() {
       </div>
 
       {/* News Grid */}
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 gap-4">
         {/* Left Column: Top Stories */}
         <div className="  rounded-sm p-1">
           <h2 className="bg-blue-600 text-white px-4 py-2 inline-block">
@@ -117,7 +117,7 @@ export default function NewsLayout() {
             >
               {slides.map((slide, index) => (
                 <SwiperSlide key={index}>
-                  <div className="relative mt-4">
+                  <div className="relative mt-1">
                     <img
                       src={slide.img}
                       alt="Top story"
@@ -149,10 +149,10 @@ export default function NewsLayout() {
           </div>
 
           {/* Movie Section */}
-          <h2 className="bg-blue-600 text-white px-4 py-2 inline-block mt-6">
+          <h2 className="bg-blue-600 text-white px-4 py-2 inline-block mt-2">
             Movie
           </h2>
-          <ul className="list-disc align-middle mt-2 space-y-2 pl-4">
+          <ul className="list-disc align-middle mt-1 space-y-2 pl-4">
             <li>
               Aishwarya Rai-Abhishek: Aishwarya Rai-Abhishek are trending once
               again.. Netizens react to their divorce rumors!
@@ -172,7 +172,7 @@ export default function NewsLayout() {
           <h2 className="bg-blue-600 text-white px-4 py-2 inline-block">
             Latest News
           </h2>
-          <ul className="list-disc align-middle mt-4 space-y-3 pl-4">
+          <ul className="list-disc align-middle mt-1 space-y-3 pl-4">
             {latestNews.map((news, index) => (
               <li key={index} className="border-b pb-2">
                 {news}
@@ -202,7 +202,7 @@ export default function NewsLayout() {
             </select>
           </div>
 
-          <div className="mt-4 space-y-4">
+          <div className="mt-1 space-y-4">
             {districtNews.map((news, index) => (
               <div
                 key={index}
@@ -227,7 +227,7 @@ export default function NewsLayout() {
           <h2 className="bg-blue-600 text-white px-4 py-2 inline-block">
             Crime
           </h2>
-          <div className="relative mt-4">
+          <div className="relative mt-1">
             <img
               src="/test1.jpg"
               alt="Top story"
@@ -256,7 +256,7 @@ export default function NewsLayout() {
           <h2 className="bg-blue-600 text-white px-4 py-2 inline-block">
             Politice
           </h2>
-          <div className="relative mt-4">
+          <div className="relative mt-1">
             <img
               src="/test2.jpg"
               alt="Top story"
@@ -269,7 +269,7 @@ export default function NewsLayout() {
               </p>
             </div>
           </div>
-          <ul className="list-disc align-middle mt-4 space-y-3 pl-4">
+          <ul className="list-disc align-middle mt-1 space-y-3 pl-4">
             {latestNews.map((news, index) => (
               <li key={index} className="border-b pb-2">
                 {news}
@@ -285,7 +285,7 @@ export default function NewsLayout() {
           <h2 className="bg-blue-600 text-white px-4 py-2 inline-block">
             Career
           </h2>
-          <div className="relative mt-4">
+          <div className="relative mt-1">
             <img
               src="/test3.jpg"
               alt="Top story"

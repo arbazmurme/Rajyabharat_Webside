@@ -126,7 +126,6 @@ const Header = () => {
 
   return (
     <>
-
       {/* Topbar Start */}
       <div id="top-bar">
         <div className="absolute top-0 left-0 flex flex-col md:flex-row  px-4 md:px-8 py-4 w-full md:hidden">
@@ -155,7 +154,7 @@ const Header = () => {
           </div>
         </div>
         <hr className="border-gray-300" />
-        <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-4 w-full  bg-gray-200">
+        <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-4 w-full  bg-gray-50">
           {/* Logo */}
           <div className="mb-4 md:mb-0">
             <img
