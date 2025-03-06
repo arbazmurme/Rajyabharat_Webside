@@ -19,7 +19,7 @@ const Footer = () => {
           {/* Left Section - Logo & Description */}
           <div className="md:w-[316px]">
             <h1 className="text-white font-extrabold text-2xl">
-              <span className="text-rose-600">RAIYA</span>BHARAT
+              <span className="text-rose-600">RAJYA</span>BHARAT
             </h1>
             <p className="mt-4 text-[15px] text-white/80">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos,
@@ -87,10 +87,10 @@ const Footer = () => {
           </div>
 
           {/* Right Section - Links */}
-          <div className="mt-6 mb-2 md:mb-0 md:mt-0 md:max-w-[341px] ">
+          <div className="mt-6 mb-2 md:mb-0 md:mt-0 md:max-w-[341px] ml-2 md:ml-0 ">
             <div>
               <p className="text-[18px] font-medium">Pages</p>
-              <ul className="mt-4 space-y-3">
+              <ul className="mt-4 space-y-3 ">
                 <li>
                   <Link className="hover:text-gray-300" href="/">
                     📄 E Paper
