@@ -156,12 +156,18 @@ const Header = () => {
         <hr className="border-gray-300" />
         <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-4 w-full  bg-gray-50">
           {/* Logo */}
-          <div className="mb-4 md:mb-0">
+          <div className="mb-4 md:mb-0 flex flex-row items-center">
             <img
-              src="./logo.jpeg"
+              src="./logo-removebg-preview.png"
               alt="Rajyabharat Logo"
               className="h-16 md:h-40 mx-auto md:mx-0"
             />
+            <h1
+              className="text-3xl xl:text-8xl font-bold text-center md:text-left 
+   bg-gradient-to-r from-[#000958] to-[#0072FF] text-transparent bg-clip-text"
+            >
+              RAJYABHARAT
+            </h1>
           </div>
 
           {/* Buttons */}
@@ -228,7 +234,10 @@ const Header = () => {
             </div>
           )}
           {searchIcon && (
-            <span className="font-semibold text-black cursor-pointer hover:underline hidden md:inline " onClick={handleOpen}>
+            <span
+              className="font-semibold text-black cursor-pointer hover:underline hidden md:inline "
+              onClick={handleOpen}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -264,7 +273,10 @@ const Header = () => {
             ))}
           </div>
           {searchIcon && (
-            <span className="font-semibold text-black cursor-pointer hover:underline md:hidden inline" onClick={handleOpen}>
+            <span
+              className="font-semibold text-black cursor-pointer hover:underline md:hidden inline"
+              onClick={handleOpen}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
