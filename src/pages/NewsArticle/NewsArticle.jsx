@@ -145,7 +145,7 @@ export default function NewsArticle() {
           <div className="bg-white p-4">
             {/* Latest News Header */}
             <h2 className="bg-blue-700 text-white text-lg font-bold py-2 px-3">
-              Latest News
+              Most Viewed News
             </h2>
 
             {/* News List */}
