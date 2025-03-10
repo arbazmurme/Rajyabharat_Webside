@@ -4,10 +4,9 @@ import React from "react";
 import ToggleLanguageComp from "./toggleLanguage";
 
 const ToggleLanguageLayout = ({ children }) => {
-  
   return (
     <>
-     <ToggleLanguageComp />
+      <ToggleLanguageComp />
       {children}
     </>
   );
