@@ -1,23 +1,18 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
-// Create Context
-const LanguageContext = createContext();
+const LanguageContext = createContext({ language: "en", setLanguage: () => {} });
 
-// Provider Component
-export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState("en"); // Default language is English
-
-  const toggleLanguage = () => {
-    setLanguage((prevLang) => (prevLang === "en" ? "te" : "en"));
-  };
+export function LanguageProvider({ children }) {
+  const [language, setLanguage] = useState("en");
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage }}>
+    <LanguageContext.Provider value={{ language, setLanguage }}>
       {children}
     </LanguageContext.Provider>
   );
-};
+}
 
-// Custom hook for easy use
-export const useLanguage = () => useContext(LanguageContext);
+export function useLanguage() {
+  return useContext(LanguageContext) || { language: "en" }; // Provide a default fallback
+}

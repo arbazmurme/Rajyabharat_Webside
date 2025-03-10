@@ -3,28 +3,34 @@ import { useLanguage } from "@/context/LanguageContext";
 import { getNewsByCategory } from "@/redux/news/NewsSlice";
 import moment from "moment";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SideNews from "../NewsDetails/SideNews";
 import Link from "next/link";
 
 export default function CategoryDetails({ newsCategory }) {
-  const { language } = useLanguage();
-  const dispatch = useDispatch();
-  const { allCategorys } = useSelector((state) => state.category);
-  const filteredNews = allCategorys.filter(
-    (news) => news.slugUrl === newsCategory
-  );
-  const categoryId = filteredNews.map((item) => item._id).join(",");
+  const isClient = typeof window !== "undefined";
+  const { allCategorys } = isClient ? useSelector((state) => state.category) : [];
+  const { newsByCategory } = isClient ? useSelector((state) => state.news) : [];
+  const [filteredNews, setallCategorys] = useState([]);
 
+  useEffect(() => {
+    setallCategorys(allCategorys.filter(
+      (news) => news.slugUrl === newsCategory
+    ));
+  }, [allCategorys, newsCategory]);
+
+  const categoryId = filteredNews.map((item) => item._id).join(",");
+  const dispatch = useDispatch();
+  
   useEffect(() => {
     if (categoryId) {
       dispatch(getNewsByCategory({ categoryId }));
     }
   }, [dispatch, categoryId]);
-
-  const { newsByCategory } = useSelector((state) => state.news);
-
+  
+  const { language } = useLanguage();
+  
   if (!newsByCategory || newsByCategory.length === 0) {
     return (
       <div className="flex items-center justify-center h-64">

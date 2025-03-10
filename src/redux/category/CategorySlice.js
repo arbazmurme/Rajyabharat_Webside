@@ -30,7 +30,7 @@ export const getCategory = createAsyncThunk(
 );
 
 const CategorySlice = createSlice({
-  name: "category",
+  name: "categoryreducer",
   initialState,
   reducers: {},
   extraReducers: (builder) => {

@@ -60,7 +60,7 @@ export const fetchDistrictNews = createAsyncThunk(
 );
 
 const NewsAdminSlice = createSlice({
-  name: "news",
+  name: "newsreducer",
   initialState,
   reducers: {},
   extraReducers: (builder) => {

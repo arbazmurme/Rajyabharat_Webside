@@ -13,7 +13,7 @@ const Mainlayout = ({ children }) => {
   useEffect(() => {
     dispatch(getCategory());
     dispatch(getNewsAdmin());
-  }, [getCategory]);
+  }, []);
   
   return (
     <>

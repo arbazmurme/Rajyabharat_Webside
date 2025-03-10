@@ -3,12 +3,11 @@ import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import moment from "moment";
 import RelatedPost from "./RelatedPost";
-import { useSelector } from "react-redux";
-import Link from "next/link";
 import SideNews from "./SideNews";
 
 export default function NewsDetailsClient({ fetchnews, newsCategory }) {
-  const { language } = useLanguage();
+  const { language = "en" } = useLanguage() || {};
+
   return (
     <div className="flex flex-col md:flex-row">
       <div className="w-full sm:w-9/12 md:overflow-y-auto md:no-scrollbar">
