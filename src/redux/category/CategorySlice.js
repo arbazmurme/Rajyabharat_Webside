@@ -9,10 +9,7 @@ const initialState = {
         a.createdAt > b.createdAt ? 1 : -1
       )
       : [],
-  isCatthumbLoading: true,
   categoryLoading: true,
-  deleteCatLoading: true,
-  checkSlugurl: true,
 };
 
 export const getCategory = createAsyncThunk(
@@ -21,7 +18,6 @@ export const getCategory = createAsyncThunk(
     try {
       const url = `${Baseurl}/api/v1/category/all`;
       const resp = await axios(url);
-
       return resp.data.categories;
     } catch (error) {
       return thunkAPI.rejectWithValue("404 Not Found");
@@ -30,7 +26,7 @@ export const getCategory = createAsyncThunk(
 );
 
 const CategorySlice = createSlice({
-  name: "categoryreducer",
+  name: "category",
   initialState,
   reducers: {},
   extraReducers: (builder) => {

@@ -8,9 +8,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function CategoryNews({ newsCategory }) {
-  const isClient = typeof window !== "undefined";
-  const { allCategorys } = isClient ? useSelector((state) => state.category) : [];
-  const { newsByCategory, latestNews } = isClient ? useSelector((state) => state.news) : { newsByCategory: [], latestNews: [] };
+  // const isClient = typeof window !== "undefined";
+  // const { allCategorys } = isClient ? useSelector((state) => state.category) : [];
+  // const { newsByCategory, latestNews } = isClient ? useSelector((state) => state.news) : { newsByCategory: [], latestNews: [] };
+  const { allCategorys } = useSelector((state) => state.category)
+  const { newsByCategory, latestNews } = useSelector((state) => state.news)
+console.log(`newsByCategory`, newsByCategory);
+console.log(`latestNews`, latestNews);
+console.log(`allCategorys`, allCategorys);
+
+
+
+
   const [filteredNews, setFilteredNews] = useState([]);
   const dispatch = useDispatch();
   const { language } = useLanguage();
@@ -24,7 +33,7 @@ export default function CategoryNews({ newsCategory }) {
   const categoryId = filteredNews.map((item) => item._id).join(",");
 
   useEffect(() => {
-    if (typeof window !== "undefined" && categoryId) {
+    if ( categoryId) {
       dispatch(getNewsByCategory({ categoryId }));
     }
   }, [dispatch, categoryId]);

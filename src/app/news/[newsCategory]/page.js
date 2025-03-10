@@ -1,4 +1,4 @@
-import CategoryDetails from "@/pages/CategoryDetails/CategoryDetails";
+import CategoryDetails from "@/pages-components/CategoryDetails/CategoryDetails";
 
 export default async function NewsDetails({ params }) {
   const resolvedParams = await params;

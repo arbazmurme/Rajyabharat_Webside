@@ -11,13 +11,7 @@ const initialState = {
   newsByCategory: [],
   groupedNews: {},
 
-  isnewsSliderLoading: true,
-  isNewsthumbLoading: true,
-  isnewsiconLoading: true,
-
   newsLoading: true,
-  deleteNewsLoading: true,
-  checkSlugurl: true,
 };
 
 export const getNewsAdmin = createAsyncThunk(
@@ -60,7 +54,7 @@ export const fetchDistrictNews = createAsyncThunk(
 );
 
 const NewsAdminSlice = createSlice({
-  name: "newsreducer",
+  name: "news",
   initialState,
   reducers: {},
   extraReducers: (builder) => {

@@ -7,4 +7,9 @@ export const store = configureStore({
     category: categoryreducer,
     news: newsreducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      immutableCheck: false,
+      serializableCheck: false,
+    }),
 });

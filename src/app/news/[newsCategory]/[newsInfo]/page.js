@@ -1,4 +1,4 @@
-import NewsDetailsClient from "@/pages/NewsDetails/NewsDetailsClient";
+import NewsDetailsClient from "@/pages-components/NewsDetails/NewsDetailsClient";
 import { newsByslugurl } from "../../../../../utils/news/newaUtils";
 
 export default async function NewsDetailsPage({ params }) {

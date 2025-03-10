@@ -11,10 +11,12 @@ const Mainlayout = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCategory());
-    dispatch(getNewsAdmin());
+    setTimeout(() => {
+      dispatch(getCategory());
+      dispatch(getNewsAdmin());
+    }, 1000);
   }, []);
-  
+
   return (
     <>
       <Header />
