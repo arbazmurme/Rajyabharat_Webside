@@ -46,6 +46,19 @@ export const getNewsByCategory = createAsyncThunk(
   }
 );
 
+export const fetchDistrictNews = createAsyncThunk(
+  "districtNews/fetchDistrictNews",
+  async (selectedDistrict, { rejectWithValue }) => {
+    try {
+      const url = `${Baseurl}/api/v1/news/byCategorydistrict-news?district=${selectedDistrict}`;
+      const response = await axios.get(url);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const NewsAdminSlice = createSlice({
   name: "news",
   initialState,
@@ -66,9 +79,6 @@ const NewsAdminSlice = createSlice({
           .filter((news) => news.breakingNewsShow === true)
           .reverse()
           .slice(0, 6);
-        state.districtNews = action.payload
-          .filter((news) => news.breakingNewsShow === true)
-          .slice(0, 5);
 
         state.groupedNews = action.payload.reduce((acc, item) => {
           if (!acc[item.categoryId]) {
@@ -87,6 +97,11 @@ const NewsAdminSlice = createSlice({
       .addCase(getNewsByCategory.fulfilled, (state, action) => { 
         state.newsByCategory = action.payload;
         state.newsLoading = false;
+      })
+      builder
+      .addCase(fetchDistrictNews.fulfilled, (state, action) => {
+        state.loading = false;
+        state.districtNews = action.payload;
       })
   },
 });
