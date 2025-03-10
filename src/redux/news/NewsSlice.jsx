@@ -19,7 +19,7 @@ export const getNewsAdmin = createAsyncThunk(
   async (thunkAPI) => {
     try {  
       const url = `${Baseurl}/api/v1/news/all`;
-      const resp = await axios(url);;
+      const resp = await axios(url, { credentials: "include" });;
       return resp.data.news;
     } catch (error) {
       return thunkAPI.rejectWithValue("404 Not Found");
@@ -32,7 +32,7 @@ export const getNewsByCategory = createAsyncThunk(
   async (categoryId, thunkAPI) => {
     try {
       const url = `${Baseurl}/api/v1/news/byCategory`;
-      const resp = await axios.post(url, categoryId);
+      const resp = await axios.post(url, categoryId, { credentials: "include" });
       return resp.data.news;
     } catch (error) {
       return thunkAPI.rejectWithValue("404 Not Found");
@@ -45,7 +45,7 @@ export const fetchDistrictNews = createAsyncThunk(
   async (selectedDistrict, { rejectWithValue }) => {
     try {
       const url = `${Baseurl}/api/v1/news/byCategorydistrict-news?district=${selectedDistrict}`;
-      const response = await axios.get(url);
+      const response = await axios.get(url, { credentials: "include" });
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

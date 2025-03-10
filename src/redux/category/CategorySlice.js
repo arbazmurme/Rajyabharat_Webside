@@ -17,7 +17,9 @@ export const getCategory = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const url = `${Baseurl}/api/v1/category/all`;
-      const resp = await axios(url);
+      const resp = await axios(url, {
+        credentials: "include",
+      });
       return resp.data.categories;
     } catch (error) {
       return thunkAPI.rejectWithValue("404 Not Found");
