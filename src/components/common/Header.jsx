@@ -260,12 +260,13 @@ const Header = () => {
             className="flex overflow-x-auto scrollbar-hide w-full"
           >
             {allCategorys.map((item) => (
-              <span
+              <Link
+                href={`/news/${item.slugUrl}`}
                 key={item._id}
                 className="font-bold text-black cursor-pointer hover:text-gray-800 whitespace-nowrap px-2 py-1 transition"
               >
                 {language === "en" ? item.nameInTelugu : item.nameInEnglish}
-              </span>
+              </Link>
             ))}
           </div>
           {searchIcon && (
@@ -310,8 +311,19 @@ const Header = () => {
           width="60vw"
           onClose={() => setOpen(false)}
           open={open}
+          className="p-4 bg-white shadow-lg"
         >
-          <p>Content goes here...</p>
+          <div className="flex flex-col gap-y-3">
+            {allCategorys.map((item) => (
+              <Link
+                href={`/news/${item.slugUrl}`}
+                key={item._id}
+                className="text-lg font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 cursor-pointer"
+              >
+                {language === "en" ? item.nameInTelugu : item.nameInEnglish}
+              </Link>
+            ))}
+          </div>
         </Drawer>
       </div>
 
