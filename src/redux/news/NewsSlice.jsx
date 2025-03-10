@@ -5,25 +5,11 @@ const Baseurl = process.env.NEXT_PUBLIC_API_URL;
 const initialState = {
   newsTotal: [],
   latestNews: [],
-
-  latestNewsFive: [],
-  latestNewsSix: [],
-  latestFourNews: [],
-  latestNewxtFourNews: [],
-  technologyNews: [],
   sliderNews: [],
-  technologyNewsFour: [],
-
-  travellingNewsThree: [],
-  travellingNewsOne: [],
-  foodNewsThree: [],
-  foodNewsOne: [],
-  healthNewsThree: [],
-  healthNewsOne: [],
-
-  newsSlider: "",
-  newsthumb: "",
-  newsicon: "",
+  brackingNewsAll: [],
+  districtNews: [],
+  newsByCategory: [],
+  groupedNews: {},
 
   isnewsSliderLoading: true,
   isNewsthumbLoading: true,
@@ -37,9 +23,9 @@ const initialState = {
 export const getNewsAdmin = createAsyncThunk(
   "newsAdmin/getNewsAdmin",
   async (thunkAPI) => {
-    try {
+    try {  
       const url = `${Baseurl}/api/v1/news/all`;
-      const resp = await axios(url);
+      const resp = await axios(url);;
       return resp.data.news;
     } catch (error) {
       return thunkAPI.rejectWithValue("404 Not Found");
@@ -47,19 +33,15 @@ export const getNewsAdmin = createAsyncThunk(
   }
 );
 
-export const newsUpdate = createAsyncThunk(
-  "newsAdmin/newsUpdate",
-  async (formData, thunkAPI) => {
+export const getNewsByCategory = createAsyncThunk(
+  "NewsByCategory/getNewsByCategory",
+  async (categoryId, thunkAPI) => {
     try {
-      const config = {
-        Headers: { "Content-Type": "application/json" },
-      };
-      const url = `${Baseurl}/api/v1/news/newsupdate/${formData.newsid}`;
-      const resp = await axios.put(url, formData, config);
-
-      return resp.data;
+      const url = `${Baseurl}/api/v1/news/byCategory`;
+      const resp = await axios.post(url, categoryId);
+      return resp.data.news;
     } catch (error) {
-      return thunkAPI.rejectWithValue("news Not create");
+      return thunkAPI.rejectWithValue("404 Not Found");
     }
   }
 );
@@ -73,68 +55,39 @@ const NewsAdminSlice = createSlice({
       .addCase(getNewsAdmin.pending, (state) => {
         state.newsLoading = true;
       })
-      .addCase(getNewsAdmin.fulfilled, (state, action) => {
+      .addCase(getNewsAdmin.fulfilled, (state, action) => { 
         state.newsTotal = action.payload.slice().reverse();
-        state.latestNews = state.newsTotal.slice(0, 12);
-        state.latestNewsFive = state.newsTotal.slice(0, 5);
-        state.latestNewsSix = state.newsTotal.slice(0, 6);
-        state.latestFourNews = state.newsTotal.slice(1, 5);
-        state.latestNewxtFourNews = state.newsTotal.slice(6, 10);
-        state.technologyNews = state.newsTotal.filter(
-          (news) => news.categoryId === "642ff5f1444bae4057baff43"
-        );
-        state.technologyNewsFour = state.newsTotal
-          .filter((news) => news.categoryId === "642ff5f1444bae4057baff43")
-          .slice(0, 4);
-        state.travellingNewsThree = state.newsTotal
-          .filter((news) => news.categoryId === "642ff5f1444bae4057baff43")
-          .slice(0, 3);
-        state.travellingNewsOne = state.newsTotal
-          .filter((news) => news.categoryId === "642ff5f1444bae4057baff43")
-          .slice(0, 1);
-        state.foodNewsThree = state.newsTotal
-          .filter((news) => news.categoryId === "642fcfeb444bae4057bafd2c")
-          .slice(0, 3);
-        state.foodNewsOne = state.newsTotal
-          .filter((news) => news.categoryId === "642fcfeb444bae4057bafd2c")
-          .slice(0, 1);
-        state.healthNewsThree = state.newsTotal
-          .filter((news) => news.categoryId === "642fcfd5444bae4057bafd29")
-          .slice(0, 3);
-        state.healthNewsOne = state.newsTotal
-          .filter((news) => news.categoryId === "642fcfd5444bae4057bafd29")
-          .slice(0, 1);
-        state.sliderNews = state.newsTotal
+        state.latestNews = state.newsTotal.slice(0, 7);
+        state.sliderNews = action.payload
           .filter((news) => news.sliderShow === true)
-          // .slice()
-          // .reverse()
+          .reverse()
+          .slice(0, 4);
+        state.brackingNewsAll = action.payload
+          .filter((news) => news.breakingNewsShow === true)
+          .reverse()
+          .slice(0, 6);
+        state.districtNews = action.payload
+          .filter((news) => news.breakingNewsShow === true)
           .slice(0, 5);
+
+        state.groupedNews = action.payload.reduce((acc, item) => {
+          if (!acc[item.categoryId]) {
+            acc[item.categoryId] = [];
+          }
+          acc[item.categoryId].push(item);
+          return acc;
+        }, {});
 
         state.newsLoading = false;
       })
       .addCase(getNewsAdmin.rejected, (state) => {
         state.newsLoading = true;
       });
-
-    builder
-      .addCase(newsUpdate.pending, (state) => {
-        state.newsLoading = true;
-      })
-      .addCase(newsUpdate.fulfilled, (state, action) => {
-        if (action.payload.success) {
-          // state.newsTotal = state.newsTotal.filter(
-          //   (news) => news._id !== action.payload.news._id
-          // );
-          state.newsTotal = [...state.newsTotal, action.payload.news + 1]
-            .slice()
-            .reverse();
-        }
-  
+      builder
+      .addCase(getNewsByCategory.fulfilled, (state, action) => { 
+        state.newsByCategory = action.payload;
         state.newsLoading = false;
       })
-      .addCase(newsUpdate.rejected, (state) => {
-        state.newsLoading = true;
-      });
   },
 });
 

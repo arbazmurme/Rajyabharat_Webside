@@ -22,9 +22,9 @@ const Footer = () => {
               <span className="text-rose-600">RAJYA</span>BHARAT
             </h1>
             <p className="mt-4 text-[15px] text-white/80">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos,
-              fugit non. Incidunt dolorum adipisci, tempore asperiores nemo odio
-              facere officiis enim.
+              Stay updated with the latest news, breaking stories, and in-depth
+              analysis from across the globe. RAJYABHARAT brings you trusted
+              journalism, 24/7.
             </p>
             {/* Social Media Icons */}
             <div className="mt-4 flex gap-4">
@@ -91,36 +91,32 @@ const Footer = () => {
             <div>
               <p className="text-[18px] font-medium">Pages</p>
               <ul className="mt-4 space-y-3 ">
+                <li></li>
                 <li>
-                  <Link className="hover:text-gray-300" href="/">
-                    📄 E Paper
-                  </Link>
-                </li>
-                <li>
-                  <Link className="hover:text-gray-300" href="/news">
+                  <Link className="hover:text-gray-300" href="#">
                     📄 TS Dynamic
                   </Link>
                 </li>
                 <li>
-                  <Link className="hover:text-gray-300 mb" href="/contact">
+                  <Link className="hover:text-gray-300 mb" href="#">
                     📄 AP Dynamic
                   </Link>
                 </li>
               </ul>
             </div>
-              {/* App Download Section */}
-              <div className="mt-6 mb-4">
-                <p className="text-[18px] font-medium">Download the App</p>
-                <div className="mt-3 flex gap-4">
-                  <a href="#">
-                    <img
-                      src="./gat-app-now.png"
-                      alt="Google Play"
-                      className="h-12"
-                    />
-                  </a>
-                </div>
+            {/* App Download Section */}
+            <div className="mt-6 mb-4">
+              <p className="text-[18px] font-medium">Download the App</p>
+              <div className="mt-3 flex gap-4">
+                <a href="#">
+                  <img
+                    src="./gat-app-now.png"
+                    alt="Google Play"
+                    className="h-12"
+                  />
+                </a>
               </div>
+            </div>
           </div>
         </div>
       </div>

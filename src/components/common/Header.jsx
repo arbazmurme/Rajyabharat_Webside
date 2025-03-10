@@ -4,32 +4,20 @@ import { Menu, MenuItem } from "@mui/material";
 import { MenuIcon } from "lucide-react";
 import { Drawer } from "antd";
 import FullScreenDrawer from "./FullScreenDrawer";
-
-const navItems = [
-  "Telangana",
-  "Andhra Pradesh",
-  "Disha Specials",
-  "Movie",
-  "Crime",
-  "Lifestyle",
-  "Edit page",
-  "Politics",
-  "National-International",
-  "Business",
-  "Sports",
-  "District News",
-  "Devotion",
-];
+import { useSelector } from "react-redux";
+import { useLanguage } from "@/context/LanguageContext";
+import Link from "next/link";
 
 const Header = () => {
+  const { allCategorys } = useSelector((state) => state.category);
   const [showButton, setShowButton] = useState(false);
-  const [visibleItems, setVisibleItems] = useState(navItems);
+  const [visibleItems, setVisibleItems] = useState(allCategorys);
   const [moreItems, setMoreItems] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [searchIcon, setSerchIcon] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-
+  const { language } = useLanguage();
   const navRef = useRef(null);
   const sliderRef = useRef(null);
 
@@ -84,8 +72,8 @@ const Header = () => {
       let visible = [];
       let extra = [];
 
-      for (let item of navItems) {
-        totalWidth += 120;
+      for (let item of allCategorys) {
+        totalWidth += 100;
         if (totalWidth < containerWidth - 150) {
           visible.push(item);
         } else {
@@ -115,12 +103,10 @@ const Header = () => {
   };
 
   const handleOpen = () => {
-    console.log("Drawer Opened");
     setDrawerOpen(true);
   };
 
   const handleClose = () => {
-    console.log("Drawer Closed");
     setDrawerOpen(false);
   };
 
@@ -158,31 +144,27 @@ const Header = () => {
           {/* Logo */}
           <div className="mb-4 md:mb-0 flex flex-row items-center">
             <img
-              src="./logo-removebg-preview.png"
+              src="/logo-removebg-preview.png"
               alt="Rajyabharat Logo"
-              className="h-16 md:h-40 mx-auto md:mx-0"
+              className="h-16 md:h-20 mx-auto md:mx-0"
             />
             <h1
-              className="text-3xl xl:text-8xl font-bold text-center md:text-left 
-   bg-gradient-to-r from-[#000958] to-[#0072FF] text-transparent bg-clip-text"
+              className="text-4xl xl:text-7xl font-extrabold text-center md:text-left 
+  bg-gradient-to-r from-[#472fe6] to-[#0072FF] text-transparent bg-clip-text 
+  drop-shadow-[2px_2px_2px_rgba(0,0,0,0.9)] tracking-wide"
             >
               RAJYABHARAT
             </h1>
           </div>
 
           {/* Buttons */}
-          <div className="flex flex-row md:flex-col space-x-1 md:space-y-2">
-            <button className="bg-blue-600 text-white px-4 rounded-lg flex items-center justify-center space-x-2">
-              <span className=" text-[12px] md:text-[14px] py-2 md:my-0">
-                📄 E Paper
-              </span>
-            </button>
-            <button className="bg-blue-600 text-white py-2 px-4 md:py-2 rounded-lg flex items-center justify-center space-x-2">
+          <div className="flex flex-row md:flex-col space-x-1 md:space-y-1">
+            <button className="bg-blue-600 text-white py-1 px-4 md:py-2 rounded-lg flex items-center justify-center space-x-2">
               <span className=" text-[12px] md:text-[14px] md:my-0">
                 📄 TS Dynamic
               </span>
             </button>
-            <button className="bg-blue-600 text-white py-2  px-4 md:py-2 rounded-lg flex items-center justify-center space-x-2">
+            <button className="bg-blue-600 text-white py-1 px-4 md:py-2 rounded-lg flex items-center justify-center space-x-2">
               <span className=" text-[12px] md:text-[14px] md:my-0">
                 📄 AP Dynamic
               </span>
@@ -199,15 +181,22 @@ const Header = () => {
           className="bg-yellow-400 py-3 px-5 md:flex items-center justify-between hidden"
         >
           {/* Left Side (Logo & Nav Items) */}
-          <div className="flex items-center space-x-10">
-            <span className="text-xl font-bold cursor-pointer">🏠</span>
-            {visibleItems.map((item, index) => (
-              <span
-                key={index}
-                className="font-semibold text-black cursor-pointer hover:underline hidden md:inline"
+          <div
+            className={`flex items-center ${
+              searchIcon ? "space-x-8" : "space-x-9"
+            }`}
+          >
+            <Link href="/" className="text-xl font-bold cursor-pointer">
+              🏠
+            </Link>
+            {visibleItems.map((item) => (
+              <Link
+                href={`/news/${item.slugUrl}`}
+                key={item._id}
+                className="font-semibold text-black cursor-pointer hover:underline hidden md:inline hover:text-blue-600 transition-colors duration-300 ease-in-out"
               >
-                {item}
-              </span>
+                {language === "en" ? item.nameInTelugu : item.nameInEnglish}
+              </Link>
             ))}
           </div>
 
@@ -225,9 +214,16 @@ const Header = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleCloseOld}
               >
-                {moreItems.map((item, index) => (
-                  <MenuItem key={index} onClick={handleCloseOld}>
-                    {item}
+                {moreItems.map((item) => (
+                  <MenuItem key={item._id} onClick={handleCloseOld}>
+                    <Link
+                      className="hover:text-blue-600 transition-colors duration-300 ease-in-out"
+                      href={`/news/${item.slugUrl}`}
+                    >
+                      {language === "en"
+                        ? item.nameInTelugu
+                        : item.nameInEnglish}
+                    </Link>
                   </MenuItem>
                 ))}
               </Menu>
@@ -263,12 +259,12 @@ const Header = () => {
             ref={sliderRef}
             className="flex overflow-x-auto scrollbar-hide w-full"
           >
-            {navItems.map((item, index) => (
+            {allCategorys.map((item) => (
               <span
-                key={index}
+                key={item._id}
                 className="font-bold text-black cursor-pointer hover:text-gray-800 whitespace-nowrap px-2 py-1 transition"
               >
-                {item}
+                {language === "en" ? item.nameInTelugu : item.nameInEnglish}
               </span>
             ))}
           </div>
@@ -300,7 +296,7 @@ const Header = () => {
       {/* Back to Top Button */}
       {showButton && (
         <button
-          className="fixed bottom-5 right-5 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition"
+          className="fixed bottom-5 right-5 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition z-50"
           onClick={handleScrollTop}
           title="Back to Top"
         >

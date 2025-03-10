@@ -6,10 +6,9 @@ const initialState = {
   allCategorys:
     typeof window !== "undefined" && localStorage.getItem("allCategorys")
       ? JSON.parse(localStorage.getItem("allCategorys")).sort((a, b) =>
-          a.createdAt > b.createdAt ? 1 : -1
-        )
+        a.createdAt > b.createdAt ? 1 : -1
+      )
       : [],
-  catthumb: "",
   isCatthumbLoading: true,
   categoryLoading: true,
   deleteCatLoading: true,
@@ -22,6 +21,7 @@ export const getCategory = createAsyncThunk(
     try {
       const url = `${Baseurl}/api/v1/category/all`;
       const resp = await axios(url);
+
       return resp.data.categories;
     } catch (error) {
       return thunkAPI.rejectWithValue("404 Not Found");
@@ -40,9 +40,8 @@ const CategorySlice = createSlice({
       })
       .addCase(getCategory.fulfilled, (state, action) => {
         state.allCategorys = action.payload.sort((a, b) =>
-          a.createdAt > b.createdAt ? 1 : -1
-        );
-
+          a.priority - b.priority
+        )
         localStorage.setItem(
           "allCategorys",
           JSON.stringify(state.allCategorys)
@@ -55,5 +54,5 @@ const CategorySlice = createSlice({
   },
 });
 
-export const {} = CategorySlice.actions;
+export const { } = CategorySlice.actions;
 export default CategorySlice.reducer;

@@ -1,265 +1,85 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
 
-export default function NewsArticle() {
-  const tags = [
-    "Telugu News",
-    "Latest Telugu news",
-    "Latest News in Telugu",
-    "Weather Alert",
-  ];
-  const relatedPosts = [
-    {
-      id: 1,
-      title: "రాష్ట్రపతి నిలయంలో రాజపేట కళాకారుడు",
-      image: "/test1.jpg", // Replace with actual image path
-    },
-    {
-      id: 2,
-      title:
-        "Ukraine-US: ఉక్రెయిన్‌కు మరో షాక్ ఇచ్చిన అమెరికా.. ఈసారి ఏం చేసిందంటే?",
-      image: "/test2.jpg", // Replace with actual image path
-    },
-    {
-      id: 3,
-      title:
-        "అసెంబ్లీలో మాటిచ్చి మూడు నెలలు.. మూడు రూపాయలు కూడా చెక్కించలేదని ప్రభుత్వం: మంత్రి హరీష్ రావు",
-      image: "/test3.jpg", // Replace with actual image path
-    },
-  ];
+export default function Home() {
+  const [inputText, setInputText] = useState("");
+  const [translatedText, setTranslatedText] = useState("");
+  const [englishText, setEnglishText] = useState("");
+  const [teluguText, setTeluguText] = useState("");
+
+  const detectLanguageAndTranslate = async (text) => {
+    if (!text) {
+      setTranslatedText("");
+      return;
+    }
+
+    const isTelugu = /[\u0C00-\u0C7F]/.test(text);
+    const sourceLang = isTelugu ? "te" : "en";
+    const targetLang = isTelugu ? "en" : "te";
+
+    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data && data[0] && data[0][0]) {
+        setTranslatedText(data[0][0][0]); // Extracting translated text
+      }
+    } catch (error) {
+      console.error("Translation failed", error);
+      setTranslatedText("Translation error");
+    }
+  };
+
+  const handleSubmit = () => {
+    if (/[\u0C00-\u0C7F]/.test(inputText)) {
+      setTeluguText(inputText);
+      setEnglishText(translatedText);
+    } else {
+      setEnglishText(inputText);
+      setTeluguText(translatedText);
+    }
+  };
 
   return (
-    <>
-      <div className="flex flex-col md:flex-row">
-        <div className="w-full sm:w-9/12 md:overflow-y-auto md:no-scrollbar">
-          <div className="bg-white p-4">
-            {/* Headline */}
-            <h1 className="text-2xl font-bold text-gray-800">
-              Attack: Missed threat to Union Minister Jaishankar.. Khalistanis
-              attempted attack (video viral)
-            </h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4">
+      <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-md">
+        <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">
+          🌍 Bidirectional Translator (Telugu & English)
+        </h2>
 
-            {/* Author Info */}
-            <p className="text-sm text-gray-600 mt-2">
-              By <span className="font-semibold">Disha</span>, Webdesk |
-              Updated: 6 Mar 2025 9:29 AM
-            </p>
+        <input
+          type="text"
+          placeholder="Enter text in English or Telugu"
+          value={inputText}
+          onChange={(e) => {
+            setInputText(e.target.value);
+            detectLanguageAndTranslate(e.target.value);
+          }}
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
 
-            {/* Image Section */}
-            <div className="mt-4">
-              <Image
-                src="/test2.jpg"
-                alt="News Image"
-                width={800}
-                height={400}
-                className="w-full rounded-lg shadow"
-              />
-            </div>
+        <input
+          type="text"
+          placeholder="Translated text"
+          value={translatedText}
+          readOnly
+          className="w-full p-3 border rounded-lg mt-3 bg-gray-200 text-gray-700"
+        />
 
-            {/* Content */}
-            <p className="mt-4 text-gray-700 leading-relaxed">
-              Union External Affairs Minister Jaishankar, who is currently on a
-              tour of London, has averted a major threat. While he was leaving
-              in a car after attending an event at a think tank in Chatham
-              House, Khalistani sympathizers there created a commotion by
-              raising slogans against Jaishankar. Suddenly, an assailant
-              bypassed the security personnel and rushed to his car at lightning
-              speed and tried to attack Union Minister Jaishankar...
-            </p>
+        <button
+          onClick={handleSubmit}
+          className="w-full mt-4 bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition"
+        >
+          Translate & Save
+        </button>
 
-            {/* Related Article */}
-            <div className="mt-6 border-t pt-4">
-              <h2 className="text-lg font-semibold text-gray-800">
-                Also Read:
-              </h2>
-              <a href="#" className="text-blue-600 hover:underline">
-                Ukraine-US: America gave another shock to Ukraine.. What did it
-                do this time?
-              </a>
-              <p className="mt-4 text-gray-700 leading-relaxed">
-                Union External Affairs Minister Jaishankar, who is currently on
-                a tour of London, has averted a major threat. While he was
-                leaving in a car after attending an event at a think tank in
-                Chatham House, Khalistani sympathizers there created a commotion
-                by raising slogans against Jaishankar. Suddenly, an assailant
-                bypassed the security personnel and rushed to his car at
-                lightning speed and tried to attack Union Minister Jaishankar...
-              </p>
-            </div>
-
-            {/* Related Article */}
-            <div className="mt-6 border-t pt-4">
-              <h2 className="text-lg font-semibold text-gray-800">
-                Also Read:
-              </h2>
-              <a href="#" className="text-blue-600 hover:underline">
-                Ukraine-US: America gave another shock to Ukraine.. What did it
-                do this time?
-              </a>
-              <p className="mt-4 text-gray-700 leading-relaxed">
-                Union External Affairs Minister Jaishankar, who is currently on
-                a tour of London, has averted a major threat. While he was
-                leaving in a car after attending an event at a think tank in
-                Chatham House, Khalistani sympathizers there created a commotion
-                by raising slogans against Jaishankar. Suddenly, an assailant
-                bypassed the security personnel and rushed to his car at
-                lightning speed and tried to attack Union Minister Jaishankar...
-              </p>
-            </div>
-          </div>
-          <div className="bg-white p-4  ">
-            {/* Tags Section */}
-            <div className="flex gap-2 flex-wrap">
-              <span className="bg-black text-white text-sm font-semibold px-3 py-1 rounded">
-                Tags
-              </span>
-              {tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="border border-gray-400 text-gray-800 text-sm font-medium px-3 py-1 rounded cursor-pointer hover:bg-gray-200"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-            {/* Related Posts Section */}
-            <h2 className="text-xl font-semibold mt-6">Related Post</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-              {relatedPosts.map((post) => (
-                <div key={post.id} className="flex flex-col">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    width={300}
-                    height={200}
-                    className="rounded-lg shadow-md w-full h-40 object-cover"
-                  />
-                  <p className="mt-2 text-gray-800 text-sm font-medium">
-                    {post.title}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="w-full sm:w-3/12  border border-gray-300 md:sticky md:top-0">
-          <div className="bg-white p-4">
-            {/* Latest News Header */}
-            <h2 className="bg-blue-700 text-white text-lg font-bold py-2 px-3">
-              Most Viewed News
-            </h2>
-
-            {/* News List */}
-            <div className="mt-2 divide-y divide-gray-300">
-              {relatedPosts.map((news) => (
-                <div key={news.id} className="flex gap-3 py-3">
-                  {/* News Image */}
-                  <Image
-                    src={news.image}
-                    alt={news.title}
-                    width={80}
-                    height={60}
-                    className="w-20 h-16 rounded-lg object-cover shadow-sm"
-                  />
-                  {/* News Title */}
-                  <p className="text-sm text-gray-800 font-medium">
-                    {news.title}
-                  </p>
-                </div>
-              ))}
-              {relatedPosts.map((news) => (
-                <div key={news.id} className="flex gap-3 py-3">
-                  {/* News Image */}
-                  <Image
-                    src={news.image}
-                    alt={news.title}
-                    width={80}
-                    height={60}
-                    className="w-20 h-16 rounded-lg object-cover shadow-sm"
-                  />
-                  {/* News Title */}
-                  <p className="text-sm text-gray-800 font-medium">
-                    {news.title}
-                  </p>
-                </div>
-              ))}
-              {relatedPosts.map((news) => (
-                <div key={news.id} className="flex gap-3 py-3">
-                  {/* News Image */}
-                  <Image
-                    src={news.image}
-                    alt={news.title}
-                    width={80}
-                    height={60}
-                    className="w-20 h-16 rounded-lg object-cover shadow-sm"
-                  />
-                  {/* News Title */}
-                  <p className="text-sm text-gray-800 font-medium">
-                    {news.title}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="bg-white p-4">
-            {/* Latest News Header */}
-            <h2 className="bg-blue-700 text-white text-lg font-bold py-2 px-3">
-              Latest News
-            </h2>
-
-            {/* News List */}
-            <div className="mt-2 divide-y divide-gray-300">
-              {relatedPosts.map((news) => (
-                <div key={news.id} className="flex gap-3 py-3">
-                  {/* News Image */}
-                  <Image
-                    src={news.image}
-                    alt={news.title}
-                    width={80}
-                    height={60}
-                    className="w-20 h-16 rounded-lg object-cover shadow-sm"
-                  />
-                  {/* News Title */}
-                  <p className="text-sm text-gray-800 font-medium">
-                    {news.title}
-                  </p>
-                </div>
-              ))}
-              {relatedPosts.map((news) => (
-                <div key={news.id} className="flex gap-3 py-3">
-                  {/* News Image */}
-                  <Image
-                    src={news.image}
-                    alt={news.title}
-                    width={80}
-                    height={60}
-                    className="w-20 h-16 rounded-lg object-cover shadow-sm"
-                  />
-                  {/* News Title */}
-                  <p className="text-sm text-gray-800 font-medium">
-                    {news.title}
-                  </p>
-                </div>
-              ))}
-              {relatedPosts.map((news) => (
-                <div key={news.id} className="flex gap-3 py-3">
-                  {/* News Image */}
-                  <Image
-                    src={news.image}
-                    alt={news.title}
-                    width={80}
-                    height={60}
-                    className="w-20 h-16 rounded-lg object-cover shadow-sm"
-                  />
-                  {/* News Title */}
-                  <p className="text-sm text-gray-800 font-medium">
-                    {news.title}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="mt-6 bg-gray-50 p-4 rounded-lg text-gray-800">
+          <p className="font-semibold">Results:</p>
+          <p className="mt-2"><strong>English:</strong> {englishText || "N/A"}</p>
+          <p><strong>Telugu:</strong> {teluguText || "N/A"}</p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
