@@ -6,6 +6,13 @@ import { useSelector } from "react-redux";
 
 function SideNews( { newsCategory } ) {
   const { language } = useLanguage();
+  
+  if (typeof window !== "undefined") {
+    const { language } = useLanguage();
+  } else {
+    const language = "en"; // Or whatever default value you prefer
+  }
+  
   const { latestNews } = useSelector((state) => state.news);
   return (
 
