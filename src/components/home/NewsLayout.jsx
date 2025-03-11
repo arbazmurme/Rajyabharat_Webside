@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import SliderNewsComp from "./SliderNews";
 import BrackingNews from "./BrackingNews";
 import LatestNews from "./LatestNews";
@@ -6,13 +7,41 @@ import DistrictNews from "./DistrictNews";
 import { useSelector } from "react-redux";
 import { useLanguage } from "@/context/LanguageContext";
 import Link from "next/link";
+
 export default function NewsLayout() {
   const { groupedNews } = useSelector((state) => state.news);
   const { language } = useLanguage();
   const { allCategorys } = useSelector((state) => state.category);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Check if data is loaded
+    if (
+      groupedNews &&
+      Object.keys(groupedNews).length > 0 &&
+      allCategorys &&
+      allCategorys.length > 0
+    ) {
+      setIsLoading(false);
+    }
+  }, [groupedNews, allCategorys]);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[50vh]">
+        <div className="relative">
+          <div className="h-14 w-14 rounded-full border-t-8 border-b-8 border-blue-600 animate-spin"></div>
+          <div className="absolute top-0 left-0 h-14 w-14 rounded-full border-t-8 border-b-8 border-gray-200 animate-pulse"></div>
+        </div>
+        <p className="ml-4 text-xl font-semibold text-gray-700">
+          Loading news...
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <div className="p-2 md:p-4">
+    <div className="animate-fade-in p-2 md:p-4">
       {/* Breaking News */}
       <BrackingNews allCategorys={allCategorys} />
 
@@ -40,7 +69,7 @@ export default function NewsLayout() {
           return (
             <div key={categoryId} className="rounded-sm">
               <h2 className="bg-blue-600 text-white px-4 py-2 inline-block">
-                <span >
+                <span>
                   {language === "en"
                     ? newsCategoryNameInTelugu
                     : newsCategoryNameInEnglish}

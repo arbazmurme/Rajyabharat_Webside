@@ -18,7 +18,7 @@ function BrackingNews({ allCategorys }) {
   }, [brackingNewsAll]);
 
   return (
-    <div className="font-bold px- py-2 flex items-center overflow-hidden whitespace-nowrap">
+    <div className="font-bold flex items-center overflow-hidden whitespace-nowrap">
       <span className="bg-yellow-400 text-black z-10 p-2">Breaking News:</span>
 
       <motion.div

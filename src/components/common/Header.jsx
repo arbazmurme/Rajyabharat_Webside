@@ -142,34 +142,20 @@ const Header = () => {
         <hr className="border-gray-300" />
         <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-4 w-full  bg-gray-50">
           {/* Logo */}
-          <div className="mb-4 md:mb-0 flex flex-row items-center">
+          <Link href="/" className="mb-4 ml-4 md:ml-0 md:mb-0 flex flex-row items-center">
             <img
               src="/logo-removebg-preview.png"
               alt="Rajyabharat Logo"
               className="h-16 md:h-20 mx-auto md:mx-0"
             />
             <h1
-              className="text-4xl xl:text-7xl font-extrabold text-center md:text-left 
+              className="text-4xl md:text-7xl font-extrabold text-center md:text-left 
   bg-gradient-to-r from-[#472fe6] to-[#0072FF] text-transparent bg-clip-text 
   drop-shadow-[2px_2px_2px_rgba(0,0,0,0.9)] tracking-wide"
             >
               RAJYABHARAT
             </h1>
-          </div>
-
-          {/* Buttons */}
-          <div className="flex flex-row md:flex-col space-x-1 md:space-y-1">
-            <button className="bg-blue-600 text-white py-1 px-4 md:py-2 rounded-lg flex items-center justify-center space-x-2">
-              <span className=" text-[12px] md:text-[14px] md:my-0">
-                📄 TS Dynamic
-              </span>
-            </button>
-            <button className="bg-blue-600 text-white py-1 px-4 md:py-2 rounded-lg flex items-center justify-center space-x-2">
-              <span className=" text-[12px] md:text-[14px] md:my-0">
-                📄 AP Dynamic
-              </span>
-            </button>
-          </div>
+          </Link>
         </div>
       </div>
       {/* Topbar End */}
@@ -252,9 +238,9 @@ const Header = () => {
           )}
         </nav>
         <nav className="bg-yellow-400 py-2 px-2 flex items-center md:hidden relative shadow-md">
-          <span className="text-xl font-bold cursor-pointer bg-yellow-400 px-2">
+          <Link href="/" className="text-xl font-bold cursor-pointer bg-yellow-400 px-2">
             🏠
-          </span>
+          </Link>
           <div
             ref={sliderRef}
             className="flex overflow-x-auto scrollbar-hide w-full"
@@ -306,19 +292,20 @@ const Header = () => {
       )}
       <div>
         <Drawer
-          title="Navigation Drawer"
+          title="Navigation"
           placement="left"
           width="60vw"
           onClose={() => setOpen(false)}
           open={open}
-          className="p-4 bg-white shadow-lg"
+          className="p-4 bg-gradient-to-r from-white to-gray-100 shadow-2xl rounded-r-lg backdrop-blur-lg"
         >
-          <div className="flex flex-col gap-y-3">
+          <div className="flex flex-col gap-y-4">
             {allCategorys.map((item) => (
               <Link
                 href={`/news/${item.slugUrl}`}
                 key={item._id}
-                className="text-lg font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 cursor-pointer"
+                className="text-lg font-semibold text-gray-800 hover:text-blue-500 transition-all duration-300 
+        hover:scale-105 hover:underline underline-offset-4 border-b border-gray-300 pb-2"
               >
                 {language === "en" ? item.nameInTelugu : item.nameInEnglish}
               </Link>
