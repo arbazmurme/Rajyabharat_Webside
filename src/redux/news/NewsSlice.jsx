@@ -44,9 +44,11 @@ export const fetchDistrictNews = createAsyncThunk(
   "districtNews/fetchDistrictNews",
   async (selectedDistrict, { rejectWithValue }) => {
     try {
-      const url = `${Baseurl}/api/v1/news/byCategorydistrict-news?district=${selectedDistrict}`;
+      const url = `${Baseurl}/api/v1/news/byCategorydistrict-news?state=${selectedDistrict}`;
       const response = await axios.get(url, { credentials: "include" });
+      console.log(url);
       return response.data;
+      
     } catch (error) {
       return rejectWithValue(error.response.data);
     }

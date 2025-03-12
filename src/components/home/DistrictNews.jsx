@@ -30,7 +30,7 @@ function DistrictNews({ allCategorys }) {
           onChange={(e) => setSelectedDistrict(e.target.value)}
         >
           <option>Telangana</option>
-          <option>Andhrapradesh</option>
+          <option>Andhra Pradesh</option>
         </select>
       </div>
 

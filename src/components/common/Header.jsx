@@ -10,6 +10,8 @@ import Link from "next/link";
 
 const Header = () => {
   const { allCategorys } = useSelector((state) => state.category);
+  // const {data} = useSelector((state) => state.districts);
+  // console.log(data);
   const [showButton, setShowButton] = useState(false);
   const [visibleItems, setVisibleItems] = useState(allCategorys);
   const [moreItems, setMoreItems] = useState([]);
@@ -139,10 +141,13 @@ const Header = () => {
             </a>
           </div>
         </div>
-        <hr className="border-gray-300" />
+        <hr className="border-gray-300 hidden md:block" />
         <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-4 w-full  bg-gray-50">
           {/* Logo */}
-          <Link href="/" className="mb-4 ml-4 md:ml-0 md:mb-0 flex flex-row items-center">
+          <Link
+            href="/"
+            className="mb-4 ml-4 md:ml-0 md:mb-0 flex flex-row items-center"
+          >
             <img
               src="/logo-removebg-preview.png"
               alt="Rajyabharat Logo"
@@ -238,7 +243,10 @@ const Header = () => {
           )}
         </nav>
         <nav className="bg-yellow-400 py-2 px-2 flex items-center md:hidden relative shadow-md">
-          <Link href="/" className="text-xl font-bold cursor-pointer bg-yellow-400 px-2">
+          <Link
+            href="/"
+            className="text-xl font-bold cursor-pointer bg-yellow-400 px-2"
+          >
             🏠
           </Link>
           <div
